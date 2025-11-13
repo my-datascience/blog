@@ -1,7 +1,6 @@
 ---
-title: About this blog
+title: Home
 ---
-<h1>Welcome</h1>
 
 This is my personal datascience portfolio blog. I write this with these purposes in mind:
 
@@ -16,7 +15,7 @@ I'm not fully documenting my whole datascience journey here. At least not now. I
 Also, I'm not focusing on the beauty of the blog. Creating websites is not something I'm good at or even interested in. That is why I want a simple blog that allows me to focus on the content.
 
 
-<h1>Articles</h1>
+<h1>Content</h1>
 <ul>
   {% assign grouped = site.articles | group_by_exp:"item", "item.path | split: '/' | slice: 1, 1" %}
   {% for group in grouped %}
