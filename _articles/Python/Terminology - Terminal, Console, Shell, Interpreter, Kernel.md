@@ -7,7 +7,7 @@ This terminology confuses me each time I think about it. So let's talk about it 
 
 (Disclaimer: This post is mostly based on GPT-5 responses. All sentences in citation marks are either direct citations or paraphrases of ChatGPT, unless other source is mentioned.)
 
-## Terminal / Console
+# Terminal / Console
 
 "The two terms overlap historically and conceptually." There are some subtle differences, but I'm not sure ChatGPT explains them correctly. The distinctions I was able to get:
 1) Historically, "console was local to the system, for the operator" and "terminal was remote, for users connecting over communication lines".
@@ -23,14 +23,14 @@ Today it's software (an emulator) that lets you type and see command-line output
 
 **Summary**: So I think it is safe to ignore those (mostly historical) differences and treat them as basically the same thing. But if I had to make a distinction, it would be this: If you are talking about interacting with an OS, the convention is to call it a "terminal". But if you are interacting with anything else, like Python, or IPython, the convention is to call it a "console".
 
-## Shell
+# Shell
 "A shell is the program that actually interprets the text commands you type into the terminal."
 
 "Examples: bash, zsh, cmd.exe or PowerShell."
 
 **Summary**: I think of a shell as a program that actually runs inside a terminal or a console.
 
-## Python Console / Python Shell
+# Python Console / Python Shell
 "In most contexts, Python console ≈ Python shell"
 
 ```
@@ -59,7 +59,7 @@ In technical terms:
 
 **Summary**: So again, I think it is safe for me to treat them as basically the same thing. But if anything, I guess it should be analogous to the relationship between "console" (or terminal) and "shell". Meaning "Python console" is any console that runs a "Python shell", and "Python shell" is the program that actually connects my prompts to the Python interpreter.
 
-## IPython Console
+# IPython Console
 ```
 In [1]: 
 ```
@@ -83,7 +83,7 @@ Wikipedia:
 
 Note: I think that the terms "Python console" or "IPython console" are actually nonsensical in a way. They are just a console. Whatever shell is run in it is not the console's business. So I think it is clearer when we say "a console that runs an IPython shell" instead of "an IPython console".
 
-## Python Interpreter
+# Python Interpreter
 "The core engine (usually python.exe, python3, or similar) that actually executes Python code."
 
 - "Reads your code (from file or input)
@@ -101,7 +101,7 @@ When you run a Python program, code passes through Python Interpreter, which is 
 
 **Summary**: This is the most obvious term to me. It is simply the program that actually executes python commands.
 
-## Kernel
+# Kernel
 "A separate process that runs and executes code sent from an interface like Jupyter Notebook or Spyder."
 
 "The 'IPython kernel' is the engine behind Jupyter Notebooks — it's essentially IPython running in the background, communicating via messages (using ZeroMQ)."
