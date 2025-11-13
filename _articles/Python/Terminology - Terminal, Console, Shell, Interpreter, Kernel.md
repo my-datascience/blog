@@ -1,6 +1,7 @@
 ---
 title: "Terminology: Terminal, Console, Shell, Interpreter, Kernel"
 layout: article
+date: 2025-11-13
 ---
 
 This terminology confuses me each time I think about it. So let's talk about it now. And because these terms have a lot of people talking about them online - on Reddit, StackOverflow, Wikipedia, computer science formus, blogs etc. - mostly with different claims about them, I'm using ChatGPT to try to get some general definitions. I feel OK with that, because this is exactly what LLMs should be doing well.
