@@ -9,3 +9,4 @@ collections:
     output: true
     permalink: /:collection/:path/
 markdown: CommonMarkGhPages
+highlighter: rouge
