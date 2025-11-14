@@ -7,7 +7,14 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - text: Posts
+        menu:
+          - href: posts/finger_exercises.ipynb
+            text: Finger Exercises
+          - href: posts/Floating-Point.ipynb
+            text: Floating Point Arithmetics
+          - href: posts/lists_mutability_cloning.ipynb
+            text: Lists, Mutability and Cloning
 
 format:
   html:
