@@ -15,13 +15,17 @@ I'm not fully documenting my whole datascience journey here. At least not now. I
 Also, I'm not focusing on the beauty of the blog. Creating websites is not something I'm good at or even interested in. That is why I want a simple blog that allows me to focus on the content.
 
 
-# Content
-
-{% assign grouped = site.articles | group_by_exp:"item", "item.path | split: '/' | slice: 1, 1" %}
-
-{% for group in grouped %}
-- **{{ group.name }}**
-  {% for article in group.items %}
-  - [{{ article.title }}]({{ article.url | relative_url }})
+<h1>Content</h1>
+<ul>
+  {% assign grouped = site.articles | group_by_exp:"item", "item.path | split: '/' | slice: 1, 1" %}
+  {% for group in grouped %}
+    <li>
+      {{ group.name }}
+      <ul>
+        {% for article in group.items %}
+          <li><a href="{{ article.url | relative_url }}">{{ article.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
   {% endfor %}
-{% endfor %}
+</ul>
