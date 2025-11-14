@@ -1,5 +1,5 @@
 ---
-layout: notebook
+layout: default
 title: Lists, Mutability and Cloning
 date: 2025-11-13
 ---
