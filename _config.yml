@@ -8,3 +8,4 @@ collections:
   articles:
     output: true
     permalink: /:collection/:path/
+highlighter: rouge
