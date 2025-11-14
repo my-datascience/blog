@@ -1,8 +1,23 @@
 ---
-layout: default
+# layout file does not require front-matter content, but keep the dashes
 ---
-
-<link rel="stylesheet" href="/assets/css/github-markdown.css">
-<div class="markdown-body">
-  {{ content }}
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ page.title }}</title>
+  <link rel="stylesheet" href="/assets/css/github-markdown.css">
+  <style>
+    /* Optional: tweak code blocks for better visibility */
+    pre code {
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <main class="markdown-body" style="max-width:900px; margin:auto; padding:2rem;">
+    {{ content }}
+  </main>
+</body>
+</html>
