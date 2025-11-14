@@ -1,0 +1,10 @@
+theme: minima
+title: My Datascience Portfolio
+author: https://github.com/my-datascience/
+description: Personal blog
+url: "https://my-datascience.github.io"
+baseurl: "/blog" 
+collections:
+  articles:
+    output: true
+    permalink: /:collection/:path/
