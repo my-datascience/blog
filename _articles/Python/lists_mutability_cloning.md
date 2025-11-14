@@ -1,3 +1,8 @@
+---
+layout: default
+title: Lists, Mutability and Cloning
+date: 2025-11-13
+---
 # Lists, Mutability and Cloning
 
 Let's talk about the most important principles of lists and other mutable objects. I also want to mention some common "gotchas".
