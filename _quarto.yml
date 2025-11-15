@@ -17,4 +17,5 @@ format:
       - cosmo
       - brand
     css: styles.css
+    highlight-style: breeze
     toc: true
