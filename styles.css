@@ -1,1 +1,18 @@
 /* css styles */
+body p code,
+body li code,
+body td code,
+.quarto-inline-code {
+  background-color: rgb(232, 232, 232) !important;
+  color: rgb(0, 0, 0) !important;
+}
+.cell {
+  background: rgb(233, 233, 233);
+  border:rgb(0, 0, 0)
+}
+pre.sourceCode {
+    border: 1px solid #b6b6b6;
+    border-radius: 2px;
+    padding: 10px;
+    overflow-x: auto;
+}
