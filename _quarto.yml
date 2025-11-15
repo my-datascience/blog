@@ -8,7 +8,9 @@ website:
       - href: index.qmd
         text: Home
   sidebar:
-    contents: posts
+    contents: posts/**
+    collapse-level: 3
+    style: floating
 format:
   html:
     theme:
@@ -16,6 +18,3 @@ format:
       - brand
     css: styles.css
     toc: true
-
-
-
