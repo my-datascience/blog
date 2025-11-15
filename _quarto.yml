@@ -8,7 +8,7 @@ website:
       - href: index.qmd
         text: Home
   sidebar:
-    contents: reports
+    contents: posts
 format:
   html:
     theme:
