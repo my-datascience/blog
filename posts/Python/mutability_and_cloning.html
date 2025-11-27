@@ -140,7 +140,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/Python/finger_exercises.html">Python</a></li><li class="breadcrumb-item"><a href="../../posts/Python/lists_mutability_cloning.html">Mutability and Cloning</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/Python/finger_exercises.html">Python</a></li><li class="breadcrumb-item"><a href="../../posts/Python/mutability_and_cloning.html">Mutability and Cloning</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -169,13 +169,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/Python/Floating-Point.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/Python/floating_point.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Floating Point Arithmetics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/Python/lists_mutability_cloning.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../posts/Python/mutability_and_cloning.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Mutability and Cloning</span></a>
   </div>
 </li>
@@ -212,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/Python/finger_exercises.html">Python</a></li><li class="breadcrumb-item"><a href="../../posts/Python/lists_mutability_cloning.html">Mutability and Cloning</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/Python/finger_exercises.html">Python</a></li><li class="breadcrumb-item"><a href="../../posts/Python/mutability_and_cloning.html">Mutability and Cloning</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Mutability and Cloning</h1>
 </div>
@@ -239,23 +239,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Variables live in a namespace. A namespace is a mapping (we can think of it as a <code>dict</code>) from <em>variables</em> to <em>pointers</em>. So a variable is basically a label of a pointer.</li>
 <li>Pointers point to a location in memory. I think of them as memory addreses.</li>
-<li>An object is the actual thing on location in memory.</li>
+<li>An object is the actual thing on the location in memory.</li>
 </ul>
-<p>So, to sum this up, variables map to pointers and pointers map to objects. It is common to think that “variables are just names for objects”. Also, I found on the internet the sentences “variables are names associated with concrete objects” or “variable is essentially a name that is assigned to a value”. No, that’s incorrect. A variable is a name (in a namespace) of a <em>pointer</em>. And that pointer points to a location in memory where an object can be found. That object has then a value (along with a type and an identity). But a namespace isn’t the only place we can found pointers.</p>
+<p>So, to sum this up, variables map to pointers and pointers map to objects.</p>
+<p>It is common to think that “variables are just names for objects”. Also, I found on the internet sentences like “variables are names associated with concrete objects” or “variable is essentially a name that is assigned to a value”. No, that’s incorrect. A variable is a name of a <em>pointer</em>. And that pointer points to a location in memory where an object can be found. That object has then a value (along with a type and an identity). But a namespace isn’t the only place we can found pointers.</p>
 </section>
 <section id="lists-only-contain-pointers" class="level2">
 <h2 class="anchored" data-anchor-id="lists-only-contain-pointers">Lists Only Contain Pointers</h2>
-<p>Once we understand the differences between varaibles, pointers and objects, now comes the most important part: lists only contain pointers. Not objects. Not variables. Pointers. A list is internally basically an array, where each item in the array is a pointer to a memory location.</p>
+<p>Once we understand the differences between varaibles, pointers and objects, now comes the key to understand lists: Lists only contain pointers. Not objects. Not variables. Pointers. A list is internally basically an array, where each item in the array is a pointer to a memory location.</p>
 <p>The pointer, as an element of a list, can be created either implicitely, or explicitely. If we type <code>L = ['a']</code>, this is what I call an implicit creation of a pointer. Internally, two new objects are created at two different memory locations: The string <code>'a'</code> and a new list. A pointer to the string <code>'a'</code> is placed as the first element of the new list. And a pointer to the new list is placed in the current namespace and is assigned the label <code>L</code>.</p>
 <p>Or, we can place a pointer as an element of a list explicitely. That would look like this:</p>
 <pre><code>A = 'a'
 L = [A]</code></pre>
 <p>First, a new object (the string <code>'a'</code>) is created in memory and its pointer is placed to the current namespace with the label <code>A</code>. Second, a new list is created, its first element is the pointer that is named <code>A</code> and a pointer to this new list is placed to the namespace under the name <code>L</code>.</p>
+<p>I think the situation is very similar for dictionaries and sets, meaining they always only contain pointers, but I’m not 100% sure here.</p>
 </section>
 <section id="mutation" class="level2">
 <h2 class="anchored" data-anchor-id="mutation">Mutation</h2>
-<p>Mutation is the ability of some python objects (types of objects) to change. Numbers, strings or tuples are examples of immutable types. Once objects of these types are created, they cannot be changed. Any pointers that point to such objects will always point to the same unchanged objects.</p>
-<p>Examples of mutable types are lists, dictionaries or sets. After they are created, they can be changed (extended, shortened, changed elements etc.). If multiple pointers point to such an object, the change made via one pointer is visible via all other pointers:</p>
+<p>Mutation is the ability of some python objects (types of objects) to change. Numbers, strings, tuples, bools or ranges are examples of immutable types. Once objects of these types are created, they cannot be changed. Any pointers that point to such objects will always point to the very same unchanged objects.</p>
+<p>Examples of mutable types are lists, dictionaries or sets. After they are created, they can be changed (extended, shortened, replaced elements etc.). If multiple pointers point to such an object, a change made through one pointer is visible through all other pointers:</p>
 <div id="789640ed" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> []</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> [L1, <span class="st">'abc'</span>]</span>
@@ -269,7 +271,7 @@ L = [A]</code></pre>
 </section>
 <section id="self-referencing" class="level2">
 <h2 class="anchored" data-anchor-id="self-referencing">Self-Referencing</h2>
-<p>I learned this only after many years of using Python and it blew my mind. Lists contain pointers, ok. But there are not limitations on those pointers. In particular, nothing prevents a list to cointain a pointer to itself:</p>
+<p>I learned this only after many years of using Python and it blew my mind. Lists contain pointers, ok. But there are no limitations on those pointers. In particular, nothing prevents a list to cointain a pointer to itself:</p>
 <div id="a5096137" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> [<span class="st">'abc'</span>]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>L1.append(L1)</span>
@@ -278,7 +280,7 @@ L = [A]</code></pre>
 <pre><code>['abc', [...]]</code></pre>
 </div>
 </div>
-<p>In this example, the second element of the list <code>L1</code> is a pointer that points to memory location where the list <code>L1</code> is located. The interactive python shell has a particular way of letting you know this once you try to print that list: It prints the string ‘[…]’ as the second element of the list, where the pointer to itself is. Surprisingly, one can normally iterate over that list:</p>
+<p>In this example, the second element of the list <code>L1</code> is a pointer that points to memory location where the list <code>L1</code> is located. The interactive python shell has a particular way of letting you know this once you try to print that list: It prints the string <code>[...]</code> as the second element of the list, where the pointer to itself is. Surprisingly, one can normally iterate over that list:</p>
 <div id="85d57da6" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> L1:</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -321,90 +323,85 @@ L = [A]</code></pre>
 </div>
 </div>
 <p>The objects to be used as default values are created at a function definition time. And a pointer to this one object is bound to <code>list_1</code> each time the function is called without the second parameter.</p>
-<p>We can test the “default value is created at a function definition time” claim like this. The string <code>'here!'</code> is not printed until the function <code>append_val</code> is defined. And that function is not defined until the default value of <code>param2</code> is created and that value is not created until the function <code>long_computation</code> finishes creating it.</p>
-<div id="1a842b05" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> long_computation():</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">int</span>(<span class="fl">1e10</span>)):</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        x <span class="op">+=</span> <span class="dv">0</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> append_val(val, list_1 <span class="op">=</span> [], param2 <span class="op">=</span> long_computation()):</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    list_1.append(val)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'here!'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We can test the “default value is created at a function definition time” claim like this. The string <code>'here!'</code> is not printed until the function <code>append_val</code> is defined. And that function is not defined until the default value of <code>param2</code> is created and that value is not created until the function <code>create_default_val</code> finishes creating it.</p>
+<div id="1a842b05" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_default_val():</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'Inside create_default_val'</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> append_val(val, list_1 <span class="op">=</span> [], param2 <span class="op">=</span> create_default_val()):</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    list_1.append(val)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'here!'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Inside create_default_val
+here!</code></pre>
+</div>
 </div>
 </section>
 </section>
 <section id="cloning" class="level2">
 <h2 class="anchored" data-anchor-id="cloning">Cloning</h2>
-<p>I’m not sure about the exact terminology here. Does “cloning” refer to only shallow copy or both shallow and deep copy? Anyway, I will try to explicitely state what kind of copy I mean each time.</p>
 <section id="immutable-types" class="level3">
 <h3 class="anchored" data-anchor-id="immutable-types">Immutable Types</h3>
 <p>As a preface, I think we only talk about “copying” in connection with mutable types. But here I think it is interesting to look at this behavior of immutable types:</p>
-<div id="783a2ba3" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="st">'abc'</span>))</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="st">'abc'</span>))</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'-------'</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="dv">2</span>))</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="dv">2</span>))</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'-------'</span>)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="va">True</span>))</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="va">True</span>))</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'-------'</span>)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="va">None</span>))</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="va">None</span>))</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'-------'</span>)</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="bu">range</span>(<span class="dv">10</span>)))</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="bu">range</span>(<span class="dv">10</span>)))</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'-------'</span>)</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="fl">3.14</span>))</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="fl">3.14</span>))</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'-------'</span>)</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>((<span class="dv">2</span>,)))</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>((<span class="dv">2</span>,)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="783a2ba3" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\'</span><span class="st">abc</span><span class="ch">\'</span><span class="st">'</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>(<span class="st">'abc'</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>(<span class="st">'abc'</span>))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'2'</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>(<span class="dv">2</span>))</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>(<span class="dv">2</span>))</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'True'</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>(<span class="va">True</span>))</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>(<span class="va">True</span>))</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'None'</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>(<span class="va">None</span>))</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>(<span class="va">None</span>))</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'range(10)'</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>(<span class="bu">range</span>(<span class="dv">10</span>)))</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>(<span class="bu">range</span>(<span class="dv">10</span>)))</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'3.14'</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>(<span class="fl">3.14</span>))</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>(<span class="fl">3.14</span>))</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>(<span class="bu">float</span>(<span class="fl">3.14</span>)) <span class="op">==</span> <span class="bu">id</span>(<span class="bu">float</span>(<span class="fl">3.14</span>)))</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'(2,)'</span>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>((<span class="dv">2</span>,)))</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>((<span class="dv">2</span>,)))</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'  '</span>, <span class="bu">id</span>((<span class="dv">2</span>,)) <span class="op">==</span> <span class="bu">id</span>((<span class="dv">2</span>,)))</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1640577203152
-1640577203152
--------
-140710899286984
-140710899286984
--------
-140710898401712
-140710898401712
--------
-140710898401776
-140710898401776
--------
-1640673096160
-1640673096160
--------
-1640673251568
-1638533141008
--------
-1640676037040
-1640674705520</code></pre>
+<pre><code>'abc'
+   1592388385840
+   1592388385840
+2
+   140703871009736
+   140703871009736
+True
+   140703870124464
+   140703870124464
+None
+   140703870124528
+   140703870124528
+range(10)
+   1592486025168
+   1592486025168
+3.14
+   1592480060080
+   1592483131696
+   True
+(2,)
+   1592486316928
+   1592485965792
+   True</code></pre>
 </div>
 </div>
-<p>I’m not 100% sure if I can generalize like this, but I will :). 1) All instances of <code>str</code>, <code>int</code>, <code>bool</code> and <code>NoneType</code> and <code>range</code> types that have the same value are the same object. 2) Instances of <code>float</code> and <code>tuple</code> types, even if they have the same value, are different objects.</p>
-<p>BUT, this surprisingly yields <code>True</code>:</p>
-<div id="ff73b6c8" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>((<span class="dv">2</span>,)) <span class="op">==</span> <span class="bu">id</span>((<span class="dv">2</span>,)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>True</code></pre>
-</div>
-</div>
-<p>I guess it means that the same tuples created in a single expression are the same object, but tuples created in different expressions are different objects… But I honestly don’t know.</p>
-<p>Similarly, two <code>float</code> instances that actually represent the same integer are the same object when created in a single expression, but different object when created individually:</p>
-<div id="12c62e09" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="bu">float</span>(<span class="dv">2</span>)))</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="bu">float</span>(<span class="dv">2</span>)))</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">id</span>(<span class="bu">float</span>(<span class="dv">2</span>)) <span class="op">==</span> <span class="bu">id</span>(<span class="bu">float</span>(<span class="dv">2</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1640673251568
-1640673251440
-True</code></pre>
-</div>
-</div>
+<p>It is important to mention here that these results are not universal. For example, in an online python compiler I tried, ranges that had the same value vere in fact different objects. Nevertheless, it is worth keeping in mind that:</p>
+<ul>
+<li>Different instances (with the same value) of some built-in immutable types <em>can be</em> the very same object.</li>
+<li>For some types, this can be true only for instances created as part of a single expression (e.g.&nbsp;<code>id(3.14) == id(3.14)</code>); for other types both instances can be created even in separate expressions.</li>
+</ul>
+<p>This behavior of Python is called <em>interning</em> and it is of course performed to improve efficiency. There is also a function of the module <code>sys</code>, called <code>sys.intern</code> (see <a href="https://docs.python.org/3/library/sys.html#sys.intern">here</a>), that can intern a string on demand.</p>
+<p>Btw this <a href="https://www.geeksforgeeks.org/python/object-interning-in-python/">article</a> on GeeksForGeeks says that for integers, interning only happens for values between -5 and 256.</p>
 <p>Anyway, back to cloning. Of mutable types. There are two basic versions of cloning, a shallow copy and a deep copy. Again, the examples here are from my already mentioned favorite textbook, pages 101 and 102.</p>
 </section>
 <section id="shallow-copy" class="level3">
@@ -413,11 +410,11 @@ True</code></pre>
 <p>A shallow copy of a list <code>L</code> can be obtained by: - slicing (<code>L[:]</code>) - using the <code>list</code> method <code>copy</code> (<code>L.copy()</code>) - using list comprehension (<code>[e for e in L]</code>) - using the <code>list</code> constructor (<code>list(L)</code>) - or using the generic <code>copy</code> method of the <code>copy</code> module (<code>copy.copy(L)</code>).</p>
 <p>Remember, it would be just a copy of the pointers. If objects that those pointers point at are mutable, any changes made to the objects via the old list are visible in the new list.</p>
 <div id="b43f7a9a" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> [<span class="dv">2</span>]</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> [L]</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> L1[:]</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>L.append(<span class="dv">3</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>L1 <span class="op">=</span> <span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>L2 <span class="op">=</span> <span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> [<span class="dv">2</span>]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> [L]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> L1[:]</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>L.append(<span class="dv">3</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>L1 <span class="op">=</span> <span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>L2 <span class="op">=</span> <span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>L1 = [[2, 3]], L2 = [[2, 3]]</code></pre>
 </div>
@@ -427,47 +424,47 @@ True</code></pre>
 <h3 class="anchored" data-anchor-id="deep-copy">Deep Copy</h3>
 <p>If we have a list whose elements are mutable, we might want to copy the list in such a way that changes via the old list do not propagate to the new list - in other words, we might want not only to copy the list, but also its elements. This is what the function <code>deepcopy</code> of the module <code>copy</code> does:</p>
 <div id="6cd5c39c" class="cell" data-execution_count="25">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> copy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> copy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="c6b3cb33" class="cell" data-execution_count="26">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> [<span class="dv">2</span>]</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> [L]</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> copy.deepcopy(L1)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>L.append(<span class="dv">3</span>)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>L1 <span class="op">=</span> <span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>L2 <span class="op">=</span> <span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> [<span class="dv">2</span>]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> [L]</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> copy.deepcopy(L1)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>L.append(<span class="dv">3</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>L1 <span class="op">=</span> <span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>L2 <span class="op">=</span> <span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>L1 = [[2, 3]], L2 = [[2]]</code></pre>
 </div>
 </div>
 <p>Here, <code>L2</code> is not affected by the mutation of <code>L</code>, because <code>L2</code> doesn’t contain anymore the object to which <code>L</code> points. It contains its copy. I’m not sure about the exact internal mechanics, but I imagine the <code>deepcopy</code> function does this: It goes to <code>L1</code> and makes a shallow copy of it. It then goes to each element in that new list, copies the object to which the element points (creates new such object at a different memory location) and replaces the pointer in the new list with a pointer to this new object. It does that “all the way to the bottom”, meaning if an element of the list being copied is another list, its deep copy is also created:</p>
 <div id="4ce01daa" class="cell" data-execution_count="27">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> [<span class="dv">2</span>]</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> [[L]]</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> copy.deepcopy(L1)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>L.append(<span class="dv">3</span>)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>L1 <span class="op">=</span> <span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>L2 <span class="op">=</span> <span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> [<span class="dv">2</span>]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> [[L]]</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> copy.deepcopy(L1)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>L.append(<span class="dv">3</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>L1 <span class="op">=</span> <span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>L2 <span class="op">=</span> <span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>L1 = [[[2, 3]]], L2 = [[[2]]]</code></pre>
 </div>
 </div>
 <p>There are two subtleties to be mentioned here. First, if the list to be copied is self-referencing, the <code>deepcopy</code> function somehow notices it and replicates the structure in the new list. Second, if two elements of the old list contain the same pointer, the object this pointer points to is copied only once and the new pointer is used twice in the new list. In other words, also this structure is maintained.</p>
 <div id="efd337a6" class="cell" data-execution_count="28">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> [<span class="st">'abc'</span>]</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>L1.append(L1)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(L1, <span class="bu">id</span>(L1), <span class="bu">id</span>(L1[<span class="op">-</span><span class="dv">1</span>]))</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> copy.deepcopy(L1)</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(L2, <span class="bu">id</span>(L2), <span class="bu">id</span>(L2[<span class="op">-</span><span class="dv">1</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> [<span class="st">'abc'</span>]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>L1.append(L1)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(L1, <span class="bu">id</span>(L1), <span class="bu">id</span>(L1[<span class="op">-</span><span class="dv">1</span>]))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> copy.deepcopy(L1)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(L2, <span class="bu">id</span>(L2), <span class="bu">id</span>(L2[<span class="op">-</span><span class="dv">1</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>['abc', [...]] 1640674902656 1640674902656
 ['abc', [...]] 1640674911232 1640674911232</code></pre>
 </div>
 </div>
 <div id="993a7443" class="cell" data-execution_count="29">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> [<span class="st">'abc'</span>]</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> [L, L]</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> copy.deepcopy(L1)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>L2[<span class="dv">0</span>].append(<span class="dv">2</span>)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(L2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> [<span class="st">'abc'</span>]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> [L, L]</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> copy.deepcopy(L1)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>L2[<span class="dv">0</span>].append(<span class="dv">2</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(L2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[['abc', 2], ['abc', 2]]</code></pre>
 </div>
@@ -551,7 +548,7 @@ True</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/my-datascience\.github\.io\/blog\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
