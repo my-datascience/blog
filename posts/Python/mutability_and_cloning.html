@@ -407,7 +407,14 @@ range(10)
 <section id="shallow-copy" class="level3">
 <h3 class="anchored" data-anchor-id="shallow-copy">Shallow Copy</h3>
 <p>Recall that a list is just an array of pointers. A shallow copy is simply a new list (a new object) that contains the same pointers.</p>
-<p>A shallow copy of a list <code>L</code> can be obtained by: - slicing (<code>L[:]</code>) - using the <code>list</code> method <code>copy</code> (<code>L.copy()</code>) - using list comprehension (<code>[e for e in L]</code>) - using the <code>list</code> constructor (<code>list(L)</code>) - or using the generic <code>copy</code> method of the <code>copy</code> module (<code>copy.copy(L)</code>).</p>
+<p>A shallow copy of a list <code>L</code> can be obtained by:</p>
+<ul>
+<li>slicing (<code>L[:]</code>)</li>
+<li>using the <code>list</code> method <code>copy</code> (<code>L.copy()</code>)</li>
+<li>using list comprehension (<code>[e for e in L]</code>)</li>
+<li>using the <code>list</code> constructor (<code>list(L)</code>)</li>
+<li>or using the generic <code>copy</code> method of the <code>copy</code> module (<code>copy.copy(L)</code>).</li>
+</ul>
 <p>Remember, it would be just a copy of the pointers. If objects that those pointers point at are mutable, any changes made to the objects via the old list are visible in the new list.</p>
 <div id="b43f7a9a" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> [<span class="dv">2</span>]</span>
